@@ -37,7 +37,7 @@ public class CardTest2 {
     }
 
     @Test
-    @DisplayName("Успешно проведенная операция при покупке в кредит")
+    @DisplayName("Успешно проведенная операция")
     void shouldProvideSuccessOperation() {
         driver.findElement(By.xpath("//span[@class='button__content']/*[.='Купить']")).click();
         driver.findElement(By.xpath("//span[@class='input__box']/input[@class='input__control' and @maxlength='19']"))
@@ -59,7 +59,7 @@ public class CardTest2 {
     }
 
     @Test
-    @DisplayName("Операция отклонена при покупке в кредит")
+    @DisplayName("Операция отклонена")
     void shouldDeclineOperation() {
         driver.findElement(By.xpath("//span[@class='button__content']/*[.='Купить']")).click();
         driver.findElement(By.xpath("//span[@class='input__box']/input[@class='input__control' and @maxlength='19']"))
