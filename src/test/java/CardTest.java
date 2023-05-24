@@ -52,10 +52,10 @@ public class CardTest {
                 .sendKeys("999");
         driver.findElement(By.xpath("//*[text()='Продолжить']")).click();
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        driver.findElement(By.xpath("//div[@class='notification__content'][text()='Операция одобрена Банком.']")).getText().trim();
-        var actualText = driver.findElement(By.xpath("//div[@class='notification__content'][text()='Операция одобрена Банком.']"))
-                .getText();
-        assertEquals("Операция одобрена Банком.", actualText);
+       // driver.findElement(By.xpath("//div[@class='notification__content'][text()='Операция одобрена Банком.']")).getText().trim();
+        var actualText = driver.findElement(By.xpath("//div[@class='notification__title'][text()='Успешно']"))
+                .getText().trim();
+        assertEquals("Успешно", actualText);
     }
 
     @Test
