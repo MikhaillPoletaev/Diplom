@@ -29,34 +29,56 @@ public class Objects extends BaseSeleniumPage{
     private WebElement continueButton;
 
     @FindBy(xpath = "//span[@class='input__sub']")
-    private WebElement errorMessage;
+    private static WebElement errorMessage;
 
     @FindBy(xpath = "//div[contains (@class, 'notification_status_ok')]")
-    private WebElement successNotification;
+    private static WebElement successNotification;
 
     @FindBy(xpath = "//div[contains (@class, 'notification_status_error')]")
-    private WebElement errorNotification;
+    private static WebElement errorNotification;
 
     public Objects() {
         driver.get("http://localhost:8080/");
         PageFactory.initElements(driver, this);
     }
 
-    public Objects successBuy(DataHelper.CardInfo cardValue , DataHelper.MonthYear monthValue, DataHelper.MonthYear yearValue,
-                              DataHelper.CardHolder cardHolderValue, DataHelper.VerificationCode verificationValue){
+    public Objects byCard(DataHelper.CardInfo info){
         buyButton.click();
-        cardNumber.sendKeys(cardValue.getCardNumber());
-        month.sendKeys(monthValue.getMonth());
-        year.sendKeys(yearValue.getYear());
-        cardHolder.sendKeys(cardHolderValue.getName());
-        verificationCode.sendKeys(verificationValue.getCode());
-        continueButton.click();
+        cardNumber.sendKeys(info.getCardNumber());
         return this;
     }
 
+    public Objects byCredit(DataHelper.CardInfo creditInfo){
+        creditButton.click();
+        cardNumber.sendKeys(creditInfo.getCardNumber());
+        return this;
+    }
 
+    public Objects setMonthYear(DataHelper.MonthYear data){
+        month.sendKeys(data.getMonth());
+        year.sendKeys(data.getYear());
+        return this;
+    }
 
+    public Objects setCardHolder(DataHelper.CardHolder holder){
+        cardHolder.sendKeys(holder.getName());
+        return this;
+    }
 
+    public Objects setVerification(DataHelper.VerificationCode code){
+        verificationCode.sendKeys(code.getCode());
+        return this;
+    }
 
+    public static void findSuccessMessage(){
+        successNotification.isDisplayed();
+    }
 
+    public static void findErrorMessage(){
+        errorNotification.isDisplayed();
+    }
+
+    public static void findErrorNotification(){
+        errorMessage.isDisplayed();
+    }
 }

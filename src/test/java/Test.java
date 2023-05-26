@@ -22,7 +22,7 @@ public class Test {
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--no-sandbox");
         options.addArguments("--remote-allow-origins=*");
-        //options.addArguments("--headless");
+        options.addArguments("--headless");
         driver = new ChromeDriver(options);
         driver.get("http://localhost:8080/");
     }
@@ -41,7 +41,13 @@ public class Test {
         var cardHolder = DataHelper.validName();
         var code = DataHelper.validCode();
         Objects objects = new Objects();
-        objects.successBuy(cardNumber, month, year, cardHolder, code);
+        objects.byCard(cardNumber);
+        objects.setMonthYear(month);
+        objects.setMonthYear(year);
+        objects.setCardHolder(cardHolder);
+        objects.setVerification(code);
+        Objects.findErrorMessage();
+
     }
 
 }
