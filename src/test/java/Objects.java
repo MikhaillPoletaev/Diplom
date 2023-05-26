@@ -67,6 +67,7 @@ public class Objects extends BaseSeleniumPage{
 
     public Objects setVerification(DataHelper.VerificationCode code){
         verificationCode.sendKeys(code.getCode());
+        continueButton.click();
         return this;
     }
 
