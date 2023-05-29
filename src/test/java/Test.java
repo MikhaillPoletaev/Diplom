@@ -36,14 +36,12 @@ public class Test {
     @org.junit.jupiter.api.Test
     void shouldTest() {
         var cardNumber = DataHelper.firstCardInfo();
-        var month = DataHelper.validData();
-        var year = DataHelper.validData();
+        var monthYear = DataHelper.validData();
         var cardHolder = DataHelper.validName();
         var code = DataHelper.validCode();
         Objects objects = new Objects();
         objects.byCard(cardNumber);
-        objects.setMonthYear(month);
-        objects.setMonthYear(year);
+        objects.setMonthYear(monthYear);
         objects.setCardHolder(cardHolder);
         objects.setVerification(code);
         Objects.findSuccessMessage();
