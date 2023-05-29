@@ -40,7 +40,9 @@ public class DataHelper {
         return new MonthYear("13", "25");
     }
 
-    public static MonthYear invalidMonthTwo() { return new MonthYear("00", "25"); }
+    public static MonthYear invalidMonthTwo() {
+        return new MonthYear("00", "25");
+    }
 
     @Value
     public static class CardHolder {
