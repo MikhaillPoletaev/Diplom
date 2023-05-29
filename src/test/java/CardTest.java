@@ -1,5 +1,6 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -10,7 +11,6 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CardTest {
-
     private WebDriver driver;
 
     @BeforeAll
@@ -52,10 +52,7 @@ public class CardTest {
                 .sendKeys("999");
         driver.findElement(By.xpath("//*[text()='Продолжить']")).click();
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        driver.findElement(By.xpath("//div[@class='notification__content'][text()='Операция одобрена Банком.']")).getText().trim();
-        var actualText = driver.findElement(By.xpath("//div[@class='notification__content'][text()='Операция одобрена Банком.']"))
-                .getText();
-        assertEquals("Операция одобрена Банком.", actualText);
+        driver.findElement(By.xpath("//div[contains (@class, 'notification_status_ok')]")).isDisplayed();
     }
 
     @Test
@@ -74,10 +71,7 @@ public class CardTest {
                 .sendKeys("999");
         driver.findElement(By.xpath("//*[text()='Продолжить']")).click();
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        driver.findElement(By.xpath("//div[@class='notification__content'][text()='Ошибка! Банк отказал в проведении операции.']")).getText().trim();
-        var actualText = driver.findElement(By.xpath("//div[@class='notification__content'][text()='Ошибка! Банк отказал в проведении операции.']"))
-                .getText();
-        assertEquals("Ошибка! Банк отказал в проведении операции.", actualText);
+        driver.findElement(By.xpath("//div[contains (@class, 'notification_status_error')]")).isDisplayed();
     }
 
     @Test

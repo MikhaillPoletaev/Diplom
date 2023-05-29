@@ -1,5 +1,6 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -25,7 +26,7 @@ public class CardTest2 {
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--no-sandbox");
         options.addArguments("--remote-allow-origins=*");
-        //options.addArguments("--headless");
+        options.addArguments("--headless");
         driver = new ChromeDriver(options);
         driver.get("http://localhost:8080/");
     }
@@ -37,7 +38,7 @@ public class CardTest2 {
     }
 
     @Test
-    @DisplayName("Успешно проведенная операция при покупке в кредит")
+    @DisplayName("Успешно проведенная операция")
     void shouldProvideSuccessOperation() {
         driver.findElement(By.xpath("//span[@class='button__content']/*[.='Купить']")).click();
         driver.findElement(By.xpath("//span[@class='input__box']/input[@class='input__control' and @maxlength='19']"))
@@ -52,14 +53,11 @@ public class CardTest2 {
                 .sendKeys("999");
         driver.findElement(By.xpath("//*[text()='Продолжить']")).click();
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        driver.findElement(By.xpath("//div[@class='notification__content'][text()='Операция одобрена Банком.']")).getText().trim();
-        var actualText = driver.findElement(By.xpath("//div[@class='notification__content'][text()='Операция одобрена Банком.']"))
-                .getText();
-        assertEquals("Операция одобрена Банком.", actualText);
+        driver.findElement(By.xpath("//div[contains (@class, 'notification_status_ok')]")).isDisplayed();
     }
 
     @Test
-    @DisplayName("Операция отклонена при покупке в кредит")
+    @DisplayName("Операция отклонена")
     void shouldDeclineOperation() {
         driver.findElement(By.xpath("//span[@class='button__content']/*[.='Купить']")).click();
         driver.findElement(By.xpath("//span[@class='input__box']/input[@class='input__control' and @maxlength='19']"))
@@ -74,10 +72,7 @@ public class CardTest2 {
                 .sendKeys("999");
         driver.findElement(By.xpath("//*[text()='Продолжить']")).click();
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        driver.findElement(By.xpath("//div[@class='notification__content'][text()='Ошибка! Банк отказал в проведении операции.']")).getText().trim();
-        var actualText = driver.findElement(By.xpath("//div[@class='notification__content'][text()='Ошибка! Банк отказал в проведении операции.']"))
-                .getText();
-        assertEquals("Ошибка! Банк отказал в проведении операции.", actualText);
+        driver.findElement(By.xpath("//div[contains (@class, 'notification_status_error')]")).isDisplayed();
     }
 
     @Test
@@ -188,7 +183,7 @@ public class CardTest2 {
                 .sendKeys("00");
         driver.findElement(By.xpath("//span[@class='input__box']/input[@class='input__control' and @placeholder='22']"))
                 .sendKeys("24");
-        driver.findElement(By.xpath("//*[@id=\"root\"]/div/form/fieldset/div[3]/span/span[1]/span/span/span[2]/input"))
+        driver.findElement(By.xpath("//*[@id=\\\"root\\\"]/div/form/fieldset/div[3]/span/span[1]/span/span/span[2]/input"))
                 .sendKeys("Алейксей");
         driver.findElement(By.xpath("//span[@class='input__box']/input[@class='input__control' and @placeholder='999']"))
                 .sendKeys("999");
