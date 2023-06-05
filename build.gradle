@@ -16,7 +16,7 @@ repositories {
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
-    testImplementation 'mysql:mysql-connector-java:8.0.33'
+    testImplementation 'org.lucee:postgresql:8.3-606.jdbc4'
     testImplementation 'commons-dbutils:commons-dbutils:1.7'
     testImplementation 'org.junit.vintage:junit-vintage-engine:5.9.2'
     testImplementation 'org.seleniumhq.selenium:selenium-java:4.8.3'

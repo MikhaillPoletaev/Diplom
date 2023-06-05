@@ -12,14 +12,14 @@ public class DBTest {
     @SneakyThrows
     void setUpDB() {
         var runner = new QueryRunner();
-        var dataSQL = "INSERT INTO credit_request_entity(id, bank_id, created, status) VALUES (?, ?, ?, ?);";
+        var dataSQL = "INSERT INTO credit_request_entity(id, bank_id, status) VALUES (?, ?, ?);";
         try (
                 var conn = DriverManager.getConnection(
                         "jdbc:postgresql://localhost:5432/app", "app", "9mREsvXDs9Gk89Ef"
                 );
         ) {
-            runner.update(conn, dataSQL, "1", "4444 4444 4444 4441", "31.05.2023", "approved");
-            runner.update(conn, dataSQL, "2", "4444 4444 4444 4442", "31.05.2023", "declined");
+            runner.update(conn, dataSQL, "1", "4444 4444 4444 4441", "approved");
+            runner.update(conn, dataSQL, "2", "4444 4444 4444 4442", "declined");
         }
     }
 
