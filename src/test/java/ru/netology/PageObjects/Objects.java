@@ -1,6 +1,8 @@
+package ru.netology.PageObjects;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import ru.netology.DataHelper.DataHelper;
 
 public class Objects {
 

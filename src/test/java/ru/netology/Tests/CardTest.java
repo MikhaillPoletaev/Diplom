@@ -1,3 +1,5 @@
+package ru.netology.Tests;
+
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.Test;
@@ -6,12 +8,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.PageFactory;
+import ru.netology.DataHelper.DataHelper;
+import ru.netology.PageObjects.Objects;
 
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class CardTest2 {
+public class CardTest {
 
     private WebDriver driver;
 
@@ -27,7 +31,7 @@ public class CardTest2 {
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--no-sandbox");
         options.addArguments("--remote-allow-origins=*");
-        options.addArguments("--headless");
+        //options.addArguments("--headless");
         driver = new ChromeDriver(options);
         driver.get("http://localhost:8080/");
     }
@@ -39,11 +43,11 @@ public class CardTest2 {
     }
 
     @Test
-    @DisplayName("Успешно проведенная операция")
+    @DisplayName("Успешно проведенная операция при покупке в кредит")
     void shouldProvideSuccessOperation() {
         Objects app = PageFactory.initElements(driver, Objects.class);
         var cardNumber = DataHelper.firstCardInfo();
-        Objects.byCard(cardNumber);
+        Objects.byCredit(cardNumber);
         var monthYear = DataHelper.validData();
         Objects.setMonthYear(monthYear);
         var cardHolder = DataHelper.validName();
@@ -55,11 +59,11 @@ public class CardTest2 {
     }
 
     @Test
-    @DisplayName("Операция отклонена")
+    @DisplayName("Операция отклонена при покупке в кредит")
     void shouldDeclineOperation() {
         Objects app = PageFactory.initElements(driver, Objects.class);
         var cardNumber = DataHelper.secondCardInfo();
-        Objects.byCard(cardNumber);
+        Objects.byCredit(cardNumber);
         var monthYear = DataHelper.validData();
         Objects.setMonthYear(monthYear);
         var cardHolder = DataHelper.validName();
@@ -91,7 +95,7 @@ public class CardTest2 {
     void expiredCard() {
         Objects app = PageFactory.initElements(driver, Objects.class);
         var cardNumber = DataHelper.firstCardInfo();
-        Objects.byCard(cardNumber);
+        Objects.byCredit(cardNumber);
         var monthYear = DataHelper.invalidData();
         Objects.setMonthYear(monthYear);
         var cardHolder = DataHelper.validName();
@@ -107,7 +111,7 @@ public class CardTest2 {
     void incorrectMonth() {
         Objects app = PageFactory.initElements(driver, Objects.class);
         var cardNumber = DataHelper.firstCardInfo();
-        Objects.byCard(cardNumber);
+        Objects.byCredit(cardNumber);
         var monthYear = DataHelper.invalidMonthOne();
         Objects.setMonthYear(monthYear);
         var cardHolder = DataHelper.validName();
@@ -123,7 +127,7 @@ public class CardTest2 {
     void incorrectMonthSecond() {
         Objects app = PageFactory.initElements(driver, Objects.class);
         var cardNumber = DataHelper.firstCardInfo();
-        Objects.byCard(cardNumber);
+        Objects.byCredit(cardNumber);
         var monthYear = DataHelper.invalidMonthTwo();
         Objects.setMonthYear(monthYear);
         var cardHolder = DataHelper.validName();
@@ -139,7 +143,7 @@ public class CardTest2 {
     void cardholderNameFieldIsUnpopulated() {
         Objects app = PageFactory.initElements(driver, Objects.class);
         var cardNumber = DataHelper.firstCardInfo();
-        Objects.byCard(cardNumber);
+        Objects.byCredit(cardNumber);
         var monthYear = DataHelper.validData();
         Objects.setMonthYear(monthYear);
         var code = DataHelper.validCode();
@@ -153,7 +157,7 @@ public class CardTest2 {
     void cardholderNameIncorrectLanguage() {
         Objects app = PageFactory.initElements(driver, Objects.class);
         var cardNumber = DataHelper.firstCardInfo();
-        Objects.byCard(cardNumber);
+        Objects.byCredit(cardNumber);
         var monthYear = DataHelper.validData();
         Objects.setMonthYear(monthYear);
         var cardHolder = DataHelper.invalidName();
@@ -169,7 +173,7 @@ public class CardTest2 {
     void incorrectFormatForCVV() {
         Objects app = PageFactory.initElements(driver, Objects.class);
         var cardNumber = DataHelper.firstCardInfo();
-        Objects.byCard(cardNumber);
+        Objects.byCredit(cardNumber);
         var monthYear = DataHelper.validData();
         Objects.setMonthYear(monthYear);
         var cardHolder = DataHelper.validName();
@@ -179,4 +183,6 @@ public class CardTest2 {
         Objects.clickOnContinue();
         Objects.findErrorNotification();
     }
+
+
 }

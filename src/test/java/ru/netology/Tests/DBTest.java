@@ -1,8 +1,11 @@
+package ru.netology.Tests;
+
 import lombok.SneakyThrows;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.netology.DataHelper.DBData;
 
 import java.sql.DriverManager;
 

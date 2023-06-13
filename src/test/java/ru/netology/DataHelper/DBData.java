@@ -1,3 +1,5 @@
+package ru.netology.DataHelper;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

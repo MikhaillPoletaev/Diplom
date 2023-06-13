@@ -1,3 +1,5 @@
+package ru.netology.DataHelper;
+
 import lombok.Value;
 
 public class DataHelper {
