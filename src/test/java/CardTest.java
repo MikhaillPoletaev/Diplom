@@ -1,6 +1,9 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.qameta.allure.Allure;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -9,7 +12,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class CardTest {
 
-    private WebDriver driver;
+    protected WebDriver driver;
 
     @BeforeAll
     static void setUpAll() {
@@ -23,13 +26,16 @@ public class CardTest {
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--no-sandbox");
         options.addArguments("--remote-allow-origins=*");
-        //options.addArguments("--headless");
+        options.addArguments("--headless");
         driver = new ChromeDriver(options);
         driver.get("http://localhost:8080/");
     }
 
     @AfterEach
     void tearDown() {
+        Allure.getLifecycle().addAttachment(
+                "screenshot", "image/png", "png",
+                ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES));
         driver.quit();
         driver = null;
     }
